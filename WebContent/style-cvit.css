@@ -1,0 +1,49 @@
+/* 
+    Document   : style
+    Created on : Mar 22, 2010, 5:18:22 PM
+    Author     : hantsy
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+#loading {
+    display: none;
+    width: 100%;
+    margin: 20px;
+}
+
+.activity {
+    width: 300px;
+    margin: 20px;
+}
+
+#activity_message {
+    width: 300px;
+    width: auto;
+    margin: 20px;
+    padding: 5px;
+}
+
+#status_box {
+    width: 300px;
+    margin: 20px;
+    border: black solid 1px;
+}
+
+.error_message {
+    border: red solid 1px;
+    width: 300px;
+    margin: 20px;
+    background-color: RGB(255,200,200);
+}
+
+.good_message {
+    border: green solid 1px;
+    width: 300px;
+    margin: 20px;
+    background-color: RGB(200,255,200);
+}

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<config charset="UTF-8">
+ 
+	 <var-def name="this_month_url"><template>${month_url}</template></var-def> 
+               
+        <loop item="row">
+            <!-- list consists of all rows in the main HTML table on the page -->
+            <list>
+                <xpath expression="//div[@id='prices']/table/tbody/tr">
+                    <html-to-xml>
+                        <http url="${this_month_url}"/>
+                    </html-to-xml>
+                </xpath>
+            </list>
+            <body>
+            	<var-def name="curr_month_opening_date"> 
+					<xpath expression="data(//td[1])">  <var name="row"></var> </xpath>
+				</var-def>
+				<var-def name="curr_month_opening_price"> 
+					<xpath expression="data(//td[2])">  <var name="row"></var> </xpath>
+				</var-def>
+            </body>
+        </loop>
+        
+        <var-def name="previous_week_url"><template>${week_url}</template></var-def> 
+        
+        <var-def name="previous_week_page"> 
+           <html-to-xml>
+                   <http url="${sys.fullUrl(previous_week_url,previous_week_url)}"/>
+            </html-to-xml>
+         </var-def>
+         
+         <var-def name="prev_week_close_date"> 
+			<xpath expression="data(//div[@id='prices']/table/tbody/tr[2]/td[1])">  <var name="previous_week_page"></var> </xpath>
+		</var-def>
+		
+         <var-def name="prev_week_close_price"> 
+			<xpath expression="data(//div[@id='prices']/table/tbody/tr[2]/td[5])">  <var name="previous_week_page"></var> </xpath>
+		</var-def>
+         
+    
+</config>

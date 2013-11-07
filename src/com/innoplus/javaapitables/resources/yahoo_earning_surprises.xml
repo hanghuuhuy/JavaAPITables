@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<config charset="ISO-8859-1">
+    
+  
+<!-- <var-def name="symbol" >.WFCGT</var-def> --> 
+
+<var-def name="startUrl"><template>http://finance.yahoo.com/q/ae?s=${symbol}+Analyst+Estimates</template></var-def> 
+<var-def name="growth_table_title"><template>'Growth Est'</template></var-def>
+<var-def name="earnings_history_table_title"><template>'Earnings History'</template></var-def>
+
+<var-def name="option_details">
+                    
+        <var-def name="page"> 
+           <html-to-xml>
+                   <http url="${sys.fullUrl(startUrl,startUrl)}"/>
+            </html-to-xml>
+         </var-def>>
+
+		
+		<var-def name="date1"> 
+			<xpath expression="data(//div[@id='rightcol']/table[2]/tbody/tr[2]/td[1]/table[contains(.,string(${earnings_history_table_title}))]/tbody/tr[1]/td[1]/table[1]/tbody/tr[1]/th[2])">  <var name="page"></var> </xpath>
+		</var-def>
+		
+		<var-def name="date2"> 
+			<xpath expression="data(//div[@id='rightcol']/table[2]/tbody/tr[2]/td[1]/table[contains(.,string(${earnings_history_table_title}))]/tbody/tr/td/table[1]/tbody/tr[1]/th[3])">  <var name="page"></var> </xpath>
+		</var-def>
+		
+		<var-def name="date3"> 
+			<xpath expression="data(//div[@id='rightcol']/table[2]/tbody/tr[2]/td[1]/table[contains(.,string(${earnings_history_table_title}))]/tbody/tr/td/table[1]/tbody/tr[1]/th[4])">  <var name="page"></var> </xpath>
+		</var-def>
+		
+		<var-def name="date4"> 
+			<xpath expression="data(//div[@id='rightcol']/table[2]/tbody/tr[2]/td[1]/table[contains(.,string(${earnings_history_table_title}))]/tbody/tr/td/table[1]/tbody/tr[1]/th[5])">  <var name="page"></var> </xpath>
+		</var-def>
+		
+		<var-def name="surprise1"> 
+			<xpath expression="data(//div[@id='rightcol']/table[2]/tbody/tr[2]/td[1]/table[contains(.,string(${earnings_history_table_title}))]/tbody/tr/td/table[1]/tbody/tr[5]/td[2])">  <var name="page"></var> </xpath>
+		</var-def>
+		
+		<var-def name="surprise2"> 
+			<xpath expression="data(//div[@id='rightcol']/table[2]/tbody/tr[2]/td[1]/table[contains(.,string(${earnings_history_table_title}))]/tbody/tr/td/table[1]/tbody/tr[5]/td[3])">  <var name="page"></var> </xpath>
+		</var-def>
+		
+		<var-def name="surprise3"> 
+			<xpath expression="data(//div[@id='rightcol']/table[2]/tbody/tr[2]/td[1]/table[contains(.,string(${earnings_history_table_title}))]/tbody/tr/td/table[1]/tbody/tr[5]/td[4])">  <var name="page"></var> </xpath>
+		</var-def>
+		
+		<var-def name="surprise4"> 
+			<xpath expression="data(//div[@id='rightcol']/table[2]/tbody/tr[2]/td[1]/table[contains(.,string(${earnings_history_table_title}))]/tbody/tr/td/table[1]/tbody/tr[5]/td[5])">  <var name="page"></var> </xpath>
+		</var-def>
+		
+		<var-def name="growth_est_this_year"> 
+			<xpath expression="data(//div[@id='rightcol']/table[2]/tbody/tr[2]/td[1]/table[contains(.,string(${growth_table_title}))]//tbody/tr/td/table[1]/tbody/tr[4]/td[2])">  <var name="page"></var> </xpath>
+		</var-def>
+		
+		<var-def name="growth_est_next_year"> 
+			<xpath expression="data(//div[@id='rightcol']/table[2]/tbody/tr[2]/td[1]/table[contains(.,string(${growth_table_title}))]/tbody/tr/td/table[1]/tbody/tr[5]/td[2])">  <var name="page"></var> </xpath>
+		</var-def>
+</var-def>
+
+</config>

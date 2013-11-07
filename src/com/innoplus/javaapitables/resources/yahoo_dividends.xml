@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<config charset="UTF-8">
+ 
+	 <var-def name="page_url"><template>http://finance.yahoo.com/q/hp?s=${symbol}&amp;a=${from_month}&amp;b=${from_day}&amp;c=${from_year}&amp;d=${to_month}&amp;e=${to_day}&amp;f=${to_year}&amp;g=v</template></var-def> 
+        
+     <var-def name="page"> 
+           <html-to-xml>
+                   <http url="${sys.fullUrl(page_url,page_url)}"/>
+            </html-to-xml>
+     </var-def>       
+        
+     <var-def name="last_dividend_date"> 
+			<xpath expression="data(//table[@id='yfncsumtab']/tbody/tr[2]/td[1]/table[4]/tbody/tr[1]/td/table[1]/tbody/tr[2]/td[1])">  <var name="page"></var> </xpath>
+	</var-def>
+	
+	<var-def name="last_dividend_value"> 
+			<xpath expression="data(//table[@id='yfncsumtab']/tbody/tr[2]/td[1]/table[4]/tbody/tr[1]/td/table[1]/tbody/tr[2]/td[2])">  <var name="page"></var> </xpath>
+	</var-def>
+         
+    
+</config>

@@ -1,0 +1,64 @@
+<html>
+    <head>
+        <META HTTP-EQUIV="Content-Type" CONTENT="text/html;charset=UTF-8">
+        <title>Login</title>
+        $imports
+        <link rel="stylesheet" type="text/css" href="../style.css" title="Style"/>
+    </head>
+    <body>
+        <div id="header" class="fixed">
+
+            <div class="logo">
+                <a href="http://www.doubledividendstocks.com">
+                    <img src="../images/logo1.jpg" border="0" width="467" height="97" alt="logo" />
+                </a>
+            </div><!-- end .logo -->
+
+            <div class="nav">
+            </div><!-- end .nav -->
+
+        </div><!-- end #header -->
+        <div id="content" class="fixed">
+            <div id="maincontent" class="fixed">
+                <h2>Login</h2>
+                #if ($request.getParameter("auth-error"))
+                <div style="margin-bottom:1em;margin-top:1em;color:red;">
+                    Invalid User Name or Password, please try again.<br/>
+                    Please ensure Caps Lock is off.
+                </div>
+                #end
+
+                <form method="POST" action="j_security_check" name="form">
+                    <table border="0" style="margin-left:0.25em;">
+                        <tr>
+                            <td><label>User Name</label><font color="red">*</font></td>
+                            <td><input type="text" name="j_username" maxlength="20" style="width:150px;"/></td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td><label>User Password</label><font color="red">*</font></td>
+                            <td><input type="password" name="j_password" maxlength="20" style="width:150px;"/></td>
+                            <td><input type="submit" title="Click to Login"/></td>
+                        </tr>
+                    </table>
+                </form>
+
+                <script type="text/javascript">
+                    document.form.j_username.focus();
+                </script>
+            </div>
+        </div>
+        <div id="footer" class="fixed">
+
+            <p class="copyright">Copyright &copy; 2011 - 2012 doubledividendstocks.com. All Rights Reserved.</p>
+
+            <p class="credits">
+                <strong>Credits:</strong>
+                <span>Application developed by</span>
+                <a href="http://www.elance.com/s/innoplusco"
+                   title="Innovative Quality IT Solutions">InnoPlus</a>.
+            </p>
+
+        </div><!-- end #footer -->
+    </body>
+</html>

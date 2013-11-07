@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<click-app charset="UTF-8">
+    <pages package="com.innoplus.javaapitables.web.page">
+        <page classname="ControlPanel" path="admin/control-panel.htm"/>
+        <page classname="ManualAction" path="admin/manual-action.htm"/>
+        <page classname="Logout" path="logout.htm"/>
+        <page classname="Login" path="login.htm"/>
+        <page classname="HelloWorld" path="hello.htm"/>
+    </pages>
+    <mode value="production"/>
+</click-app>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

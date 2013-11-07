@@ -1,0 +1,121 @@
+<html>
+    <head>
+        <META HTTP-EQUIV="Content-Type" CONTENT="text/html;charset=UTF-8">
+        <title>Control Panel</title>
+        $imports
+        <link rel="stylesheet" type="text/css" href="http://97.107.139.173/JavaAPITables/style.css" title="Style"/>
+        <link rel="stylesheet" type="text/css" href="http://97.107.139.173/JavaAPITables/style-cvit.css" title="Style"/>
+        <script type="text/javascript" src="http://97.107.139.173/JavaAPITables/jquery-1.4.2.min.js"></script>
+        <script type="text/javascript">
+            var $j = jQuery.noConflict();
+        
+            function updatePremiumCall(action_name) {
+                $j("#activity_message").hide();
+                $j("#loading").show();
+
+                var url = "http://97.107.139.173/JavaAPITables/admin/manual-action.htm?action=" + action_name.toString();
+                
+                $j("#activity_message").load(url, null, function(response, status, xhr) {
+                    $j("#loading").fadeOut();
+                    if (response.toLowerCase().indexOf("not") >= 0) {
+                        $j("#activity_message").addClass("error_message");
+                    } else {
+                        $j("#activity_message").addClass("good_message");
+                    }
+                    $j("#loading").hide();
+                    $j("#activity_message").show();
+                });
+            }
+
+            function checkStatus() {
+                $j("#loading").show();
+
+                var url = "http://97.107.139.173/JavaAPITables/admin/manual-action.htm?action=check_status";
+                $j("#status_message").load(url, null, function() {
+                    $j("#loading").fadeOut();
+                });
+            }
+        </script>
+    </head>
+    <body>
+        <div id="header" class="fixed">
+
+            <div class="logo">
+                <a href="http://www.doubledividendstocks.com">
+                    <img src="../images/logo1.jpg" border="0" width="467" height="97" alt="logo" />
+                </a>
+            </div><!-- end .logo -->
+
+            <div class="nav">
+                <ul>
+                    <li><a href="control-panel.htm" class="active">Control Panel</a></li>
+                    <li><a href="../logout.htm">Logout</a></li>
+                </ul>
+            </div><!-- end .nav -->
+
+        </div><!-- end #header -->
+        <div id="content" class="fixed">
+            <div id="maincontent" class="fixed">
+                <h2>Control Panel</h2>
+                <h1>Logged user: $username</h1>
+                <div id="loading">
+                    <img src="../images/ajax-loader.gif" alt="loading" border=0>
+                </div>
+                <!--
+                <div id="status_box">
+                    <input id="check_status" type="button" onclick="javascript:checkStatus()" value="Check Auto Update Status">
+                    <div>Status:</div>
+                    <div id="status_message"></div>
+                </div>-->
+                <div id="activity_message">
+                </div>
+                <div class="activity">
+                    <input id="start_auto_update" type="button" onclick="javascript:updatePremiumCall('start_auto_update')" value="Start Auto Update">
+                </div>
+                <div class="activity">
+                    <input id="update_premium_call" type="button" onclick="javascript:updatePremiumCall('premium_call')" value="Update Premium Covered Call Table">
+                </div>
+                <div class="activity">
+                    <input id="update_premium_put" type="button" onclick="javascript:updatePremiumCall('premium_put')" value="Update Premium Covered Put Table">
+                </div>
+                <div class="activity">
+                    <input id="update_public_call" type="button" onclick="javascript:updatePremiumCall('public_call')" value="Update Public Covered Call Table">
+                </div>
+                <div class="activity">
+                    <input id="update_public_put" type="button" onclick="javascript:updatePremiumCall('public_put')" value="Update Public Covered Put Table">
+                </div>
+                <div class="activity">
+                    <input id="update_new_prospect_call" type="button" onclick="javascript:updatePremiumCall('new_prospect_call')" value="Update New Prospects Covered Call Table">
+                </div>
+                <div class="activity">
+                    <input id="update_new_prospect_put" type="button" onclick="javascript:updatePremiumCall('new_prospect_put')" value="Update New Prospects Covered Put Table">
+                </div>
+                <div class="activity">
+                    <input id="update_market_indexes" type="button" onclick="javascript:updatePremiumCall('market_indexes')" value="Update Market Indexes Table">
+                </div>
+                <div class="activity">
+                    <input id="update_industry_sectors" type="button" onclick="javascript:updatePremiumCall('industry_sectors')" value="Update Industry Sectors Table">
+                </div>
+                <div class="activity">
+                    <input id="update_market_cap" type="button" onclick="javascript:updatePremiumCall('market_cap')" value="Update Market Cap Table">
+                </div>
+                
+                <div class="activity">
+                    <input id="update_stock_screener_yahoo" type="button" onclick="javascript:updatePremiumCall('yahoo_stock_screener')" value="Update Yahoo Stock Screener">
+                </div>
+            </div>
+        </div>
+        <div id="footer" class="fixed">
+
+            <p class="copyright">Copyright &copy; 2011 - 2012 doubledividendstocks.com. All Rights Reserved.</p>
+
+            <p class="credits">
+                <strong>Credits:</strong>
+                <span>Application developed by</span>
+                <a href="http://www.elance.com/s/innoplusco"
+                   title="Innovative Quality IT Solutions">InnoPlus</a>.
+            </p>
+
+        </div><!-- end #footer -->
+    </body>
+</html>

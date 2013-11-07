@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<config charset="ISO-8859-1">
+    
+  
+<!-- <var-def name="symbol" >.WFCGT</var-def> --> 
+
+<var-def name="startUrl"><template>http://investing.money.msn.com/investments/trading-options/?symbol=${symbol}</template></var-def> 
+
+<var-def name="option_details">
+                    
+        <var-def name="page"> 
+           <html-to-xml>
+                   <http url="${sys.fullUrl(startUrl,startUrl)}"/>
+            </html-to-xml>
+         </var-def>>
+
+          
+		<var-def name="title"> 
+			<xpath expression="data(//div[@id='quickquote']/div[2])">  <var name="page"></var> </xpath>
+		</var-def>
+
+		<var-def name="bid">
+			<xpath expression="data(//div[@id='area1']/div[1]/div[1]/div[1]/div[2]/table[1]/tbody/tr[5]/td[2]/span)"> <var name="page"></var> </xpath>
+		</var-def>
+
+		<var-def name="ask">
+			<xpath expression="data(//div[@id='area1']/div[1]/div[1]/div[1]/div[2]/table[1]/tbody/tr[7]/td[2]/span)">  <var name="page"></var> </xpath>
+		</var-def>
+		<var-def name="strike_price">
+			<xpath expression="data(//div[@id='area1']/div[1]/div[1]/div[1]/div[2]/table[1]/tbody/tr[9]/td[2]/span)">  <var name="page"></var> </xpath>
+		</var-def>
+
+		<var-def name="expDate">
+			<xpath expression="data(//div[@id='area1']/div[1]/div[1]/div[1]/div[2]/table[1]/tbody/tr[12]/td[2]/span)">  <var name="page"></var> </xpath>
+		</var-def>
+</var-def>
+
+</config>
