@@ -9,7 +9,7 @@
 
 <var-def name="option_details">
                     
-        <var-def name="page"> 
+        <var-def name="page">
            <html-to-xml>
                    <http url="${sys.fullUrl(startUrl,startUrl)}"/>
             </html-to-xml>
@@ -24,10 +24,10 @@
 			<xpath expression="data(//div[@id='opdetails-bid']/span[@class='floatR'])"> <var name="page"></var> </xpath>
 		</var-def>
 
-		<var-def name="ask">
+		<!-- <var-def name="ask">
 			<xpath expression="data(//div[@id='opdetails-ask']/span[@class='floatR'])">  <var name="page"></var> </xpath>
 		</var-def>
-		<!-- <var-def name="strike_price">
+		<var-def name="strike_price">
 			<xpath expression="data(//div[@id='area1']/div[1]/div[1]/div[1]/div[2]/table[1]/tbody/tr[9]/td[2]/span)">  <var name="page"></var> </xpath>
 		</var-def>
 

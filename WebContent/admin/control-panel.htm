@@ -3,9 +3,9 @@
         <META HTTP-EQUIV="Content-Type" CONTENT="text/html;charset=UTF-8">
         <title>Control Panel</title>
         $imports
-        <link rel="stylesheet" type="text/css" href="http://97.107.139.173/JavaAPITables/style.css" title="Style"/>
-        <link rel="stylesheet" type="text/css" href="http://97.107.139.173/JavaAPITables/style-cvit.css" title="Style"/>
-        <script type="text/javascript" src="http://97.107.139.173/JavaAPITables/jquery-1.4.2.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="../style.css" title="Style"/>
+        <link rel="stylesheet" type="text/css" href="../style-cvit.css" title="Style"/>
+        <script type="text/javascript" src="../jquery-1.4.2.min.js"></script>
         <script type="text/javascript">
             var $j = jQuery.noConflict();
         
@@ -13,7 +13,8 @@
                 $j("#activity_message").hide();
                 $j("#loading").show();
 
-                var url = "http://97.107.139.173/JavaAPITables/admin/manual-action.htm?action=" + action_name.toString();
+                var url = "./manual-action.htm?action=" + action_name.toString();
+                //var url = "http://localhost:8080/JavaAPITables/admin/manual-action.htm?action=" + action_name.toString();
                 
                 $j("#activity_message").load(url, null, function(response, status, xhr) {
                     $j("#loading").fadeOut();
@@ -30,7 +31,8 @@
             function checkStatus() {
                 $j("#loading").show();
 
-                var url = "http://97.107.139.173/JavaAPITables/admin/manual-action.htm?action=check_status";
+                var url = "./manual-action.htm?action=check_status";
+                //var url = "http://localhost:8080/JavaAPITables/admin/manual-action.htm?action=check_status";
                 $j("#status_message").load(url, null, function() {
                     $j("#loading").fadeOut();
                 });

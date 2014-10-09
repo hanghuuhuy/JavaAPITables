@@ -138,7 +138,7 @@ public abstract class BaseOptionSpreadsheetManager extends BaseSpreadsheetManage
             if ((this instanceof MultiThreadable)) {
                 log.info("joining on [" + threadArrayList.size() + "] spreadsheet updater threads");
                 for (Iterator localIterator = threadArrayList.iterator(); localIterator.hasNext();) {
-                    localObject = (Thread) localIterator.next();
+                    localObject = localIterator.next();
                     ((Thread) localObject).join();
                 }
                 log.info("all spreadsheet updater threads finished");
@@ -315,7 +315,8 @@ public abstract class BaseOptionSpreadsheetManager extends BaseSpreadsheetManage
 
         }
 
-        public List<String> getStockTickers() throws IOException, ServiceException {
+        @Override
+		public List<String> getStockTickers() throws IOException, ServiceException {
             ArrayList localArrayList = new ArrayList();
             try {
                 for (CellEntry localCellEntry : this.stockTickersCellFeed.getEntries()) {
@@ -332,8 +333,9 @@ public abstract class BaseOptionSpreadsheetManager extends BaseSpreadsheetManage
             return localArrayList;
         }
 
-        public Option getOption(String stockTicker, int rowIndex) {
-            String str = ((CellEntry) this.optionTickersCellFeed.getEntries().get(rowIndex)).getCell().getValue();
+        @Override
+		public Option getOption(String stockTicker, int rowIndex) {
+            String str = this.optionTickersCellFeed.getEntries().get(rowIndex).getCell().getValue();
             if (StringUtil.isNullOrEmpty(str)) {
                 BaseOptionSpreadsheetManager.log.warn("Option ticker for stock [" + stockTicker + "] is null or empty, index [" + rowIndex + "], returning null option");
                 return null;
@@ -345,18 +347,21 @@ public abstract class BaseOptionSpreadsheetManager extends BaseSpreadsheetManage
             return localOption;
         }
         
-        public String getOptionDateSymbolValue(String stockTicker, int rowIndex) {
-            return ((CellEntry) this.optionDateSymbolCellFeed.getEntries().get(rowIndex)).getCell().getValue();
+        @Override
+		public String getOptionDateSymbolValue(String stockTicker, int rowIndex) {
+            return this.optionDateSymbolCellFeed.getEntries().get(rowIndex).getCell().getValue();
         }
         
-        public String getOptionTickeValue(String stockTicker, int rowIndex) {
-            return ((CellEntry) this.optionTickersCellFeed.getEntries().get(rowIndex)).getCell().getValue();
+        @Override
+		public String getOptionTickeValue(String stockTicker, int rowIndex) {
+            return this.optionTickersCellFeed.getEntries().get(rowIndex).getCell().getValue();
         }
         
-        public boolean isDividendValueOverrideOn(String stockTicker, int rowIndex) {
+        @Override
+		public boolean isDividendValueOverrideOn(String stockTicker, int rowIndex) {
             boolean i = false;
             try {
-                String str = ((CellEntry) this.dividendValOverrideCellFeed.getEntries().get(rowIndex)).getCell().getValue();
+                String str = this.dividendValOverrideCellFeed.getEntries().get(rowIndex).getCell().getValue();
                 if (!StringUtil.isNullOrEmpty(str)) {
                     i = (str.trim().equals("1")) || (str.trim().equalsIgnoreCase("true")) ? true : false;
                 }
@@ -367,7 +372,8 @@ public abstract class BaseOptionSpreadsheetManager extends BaseSpreadsheetManage
             return i;
         }
 
-        public void writeSpreadsheetRow(int rowIndex, String stockTicker, String scrappedStockTicker, Date expireDate, Option scrappedOption, String earningsSurprises, String epsGrowthThisYear, String epsGrowthNextYear, String dividend, String dividendDate) throws IOException, ServiceException {
+        @Override
+		public void writeSpreadsheetRow(int rowIndex, String stockTicker, String scrappedStockTicker, Date expireDate, Option scrappedOption, String earningsSurprises, String epsGrowthThisYear, String epsGrowthNextYear, String dividend, String dividendDate) throws IOException, ServiceException {
             // Write option values
             BaseOptionSpreadsheetManager.this.insertOrUpdateCellValue(BaseOptionSpreadsheetManager.this.worksheet, this.optionDateSymbolCellFeed, rowIndex, BaseOptionSpreadsheetManager.this.normalizeDateValueForSheet(expireDate) + "   (" + BaseOptionSpreadsheetManager.this.normalizeValueForSheet(scrappedOption.getTicker()) + ")", this.firstRow, BaseSpreadsheetManager.getColumnNumberFromColumnName(BaseOptionSpreadsheetManager.this.OPTION_DATE_SYMBOL_COLUMN));
             BaseOptionSpreadsheetManager.this.insertOrUpdateCellValue(BaseOptionSpreadsheetManager.this.worksheet, this.optionStrikeCellFeed, rowIndex, BaseOptionSpreadsheetManager.this.normalizeNumericValueForSheet(scrappedOption.getStrikePrice()), this.firstRow, BaseSpreadsheetManager.getColumnNumberFromColumnName(BaseOptionSpreadsheetManager.this.OPTION_STRIKE_COLUMN));
@@ -390,7 +396,8 @@ public abstract class BaseOptionSpreadsheetManager extends BaseSpreadsheetManage
             }
         }
 
-        public HashMap<String, String> getEarningsSurprisesMap(String stockTicker) {
+        @Override
+		public HashMap<String, String> getEarningsSurprisesMap(String stockTicker) {
             if (StringUtil.isNullOrEmpty(stockTicker)) {
                 BaseOptionSpreadsheetManager.log.warn("Option ticker for stock [" + stockTicker + "] is null or empty, returning null option");
                 return null;
@@ -404,8 +411,9 @@ public abstract class BaseOptionSpreadsheetManager extends BaseSpreadsheetManage
             return earningsSurprisesMap;
         }
 
-        public Date getDividendDate(String stockTicker, int rowIndex) {
-            String dividendDateCellValue = ((CellEntry) this.dividendDateCellFeed.getEntries().get(rowIndex)).getCell().getValue();
+        @Override
+		public Date getDividendDate(String stockTicker, int rowIndex) {
+            String dividendDateCellValue = this.dividendDateCellFeed.getEntries().get(rowIndex).getCell().getValue();
             if (StringUtil.isNullOrEmpty(dividendDateCellValue)) {
                 BaseOptionSpreadsheetManager.log.warn("Dividend date for stock [" + stockTicker + "] is null or empty, index [" + rowIndex + "], returning Datemin dividend date");
                 return new Date(Long.MIN_VALUE);
@@ -423,8 +431,9 @@ public abstract class BaseOptionSpreadsheetManager extends BaseSpreadsheetManage
             return dividendDate;
         }
 
-        public Double getDividendValue(String stockTicker, int rowIndex) {
-            String dividendCellValue = ((CellEntry) this.dividendCellFeed.getEntries().get(rowIndex)).getCell().getValue();
+        @Override
+		public Double getDividendValue(String stockTicker, int rowIndex) {
+            String dividendCellValue = this.dividendCellFeed.getEntries().get(rowIndex).getCell().getValue();
             if (StringUtil.isNullOrEmpty(dividendCellValue)) {
                 BaseOptionSpreadsheetManager.log.warn("Dividend date for stock [" + stockTicker + "] is null or empty, index [" + rowIndex + "], returning null dividend amount");
                 return null;
@@ -440,7 +449,8 @@ public abstract class BaseOptionSpreadsheetManager extends BaseSpreadsheetManage
             return dividend;
         }
 
-        public HashMap<String, String> getNewDividendMap(String stockTicker) {
+        @Override
+		public HashMap<String, String> getNewDividendMap(String stockTicker) {
             if (StringUtil.isNullOrEmpty(stockTicker)) {
                 BaseOptionSpreadsheetManager.log.warn("Option ticker for stock [" + stockTicker + "] is null or empty, returning null dividendMap");
                 return null;
@@ -469,7 +479,8 @@ public abstract class BaseOptionSpreadsheetManager extends BaseSpreadsheetManage
             this.spreadsheetManager = spreadsheetManager;
         }
 
-        public void run() {
+        @Override
+		public void run() {
             //BaseOptionSpreadsheetManager.this.internalUpdateSpreadsheetRowForStock(this.val$stockTicker, this.val$arr[0], this.val$rowAdaptor);
             spreadsheetManager.internalUpdateSpreadsheetRowForStock(stockTicker, arrayOfInt[0], localOptionCalcRowAdaptor);
         }
