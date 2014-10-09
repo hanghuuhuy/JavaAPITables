@@ -66,7 +66,9 @@ public class Test {
 		
 //		IndustrySectorsSpreadsheetManager.getInstance().updateWeekly(11);
 		
-		PremiumCoveredCallSpreadsheetManager.getInstance().updateDataInSpreadsheet();
+//		PremiumCoveredCallSpreadsheetManager.getInstance().updateDataInSpreadsheet();
+		
+		PremiumCoveredPutSpreadsheetManager.getInstance().updateDataInSpreadsheet();
 	}
 
 }
